@@ -1,4 +1,5 @@
 # Space-Invaders
 A JavaFX program to play Space Invaders.
 
-![alt text](https://github.com/amateur-coder-1002/Space-Invaders/blob/main/Pictures/Screenshot_3.png)
+![SpaceInvaders](https://user-images.githubusercontent.com/67403229/125967460-9f912b84-d7d9-4803-aa26-16a585cf071c.gif)
+
