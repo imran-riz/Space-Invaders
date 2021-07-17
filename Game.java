@@ -279,8 +279,6 @@ public class Game extends Application
 											movePeriod = 5 ;
 										else if(enemyCount == 1)
 											movePeriod = 2 ;
-
-//										System.out.println("enemyCount = " + enemyCount + ", movePeriod = " + movePeriod + " milliseconds");
 									}
 									
 									moveTimer.cancel() ;
@@ -689,7 +687,7 @@ public class Game extends Application
 
 		try
 		{
-			File file = new File("C:\\Users\\imran\\P.W\\JAVA\\MyBuilds\\SpaceInvaders\\HighScore.txt") ;	// the path to the text file
+			File file = new File("C:\\Users\\...\\SpaceInvaders\\HighScore.txt") ;	// the path to the text file
 			scan = new Scanner(file) ;	
 		}
 		catch(Exception e)
@@ -703,11 +701,11 @@ public class Game extends Application
 
 	private void setHighScore(String high_score)
 	{
-		try                 // ALL the I/O stuff must be in a try/catch. Everything can throw an IOException!!
+		try
 		{
 			FileWriter writer = new FileWriter("HighScore.txt") ;
-			writer.write(high_score) ;		// The write() method takes a String				
-			writer.close() ;					// Close it when done
+			writer.write(high_score) ;
+			writer.close() ;
 		}
 		catch(IOException ex) 
 		{
