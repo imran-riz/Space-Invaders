@@ -19,8 +19,8 @@ import javafx.beans.binding.* ;
 import java.util.* ;
 import java.io.* ;
 
-// javac --module-path "C:\Program Files\Java\javafx-sdk-11.0.2\lib" --add-modules javafx.controls Game.java
-// java --module-path "C:\Program Files\Java\javafx-sdk-11.0.2\lib" --add-modules javafx.controls Game
+// javac --module-path "%PATH_TO_FX%" --add-modules javafx.controls Game.java
+// java --module-path "%PATH_TO_FX%" --add-modules javafx.controls Game
 
 public class Game extends Application
 {
@@ -38,7 +38,6 @@ public class Game extends Application
 	protected long movePeriod ;
 	protected int score, rowToMove, enemyCount, highScore ;
 	protected boolean paused, gameOver ;
-
 	protected Stage window ;
 	protected Scene scene ;
 	protected Pane root ;
@@ -684,33 +683,55 @@ public class Game extends Application
 	private Integer getHighScore()
 	{
 		Scanner scan = null ;
+		String filePath, highScore ;
+
+		filePath = new File("").getAbsolutePath() ;		// get the path to this application's home foleder
+		highScore = "0" ;
 
 		try
 		{
-			File file = new File("C:\\Users\\...\\SpaceInvaders\\HighScore.txt") ;	// the path to the text file
-			scan = new Scanner(file) ;	
+			File highScoreFile = new File(filePath.concat("\\HighScore.txt")) ;		// HighScore.txt is in the application's home folder
+
+			// first check if the text file exists or not
+			if(highScoreFile.exists())
+			{
+				scan = new Scanner(highScoreFile) ;
+				highScore = scan.nextLine() ;			// read the first line of the text file
+			}
+			else
+			{
+				// create the file and insert a zero to it
+				setHighScore("0") ;
+			}
+
 		}
 		catch(Exception e)
 		{
 			System.out.println("\nException in getHighScore() -> \n" + e) ;
 		}
 
-		return Integer.parseInt(scan.nextLine()) ;	// read and return the first line
+		return Integer.parseInt(highScore) ;
 	} 
 
 
-	private void setHighScore(String high_score)
+	private Boolean setHighScore(String high_score)
 	{
+		boolean done = false ;
+
 		try
 		{
 			FileWriter writer = new FileWriter("HighScore.txt") ;
 			writer.write(high_score) ;
 			writer.close() ;
+
+			done = true ;
 		}
 		catch(IOException ex) 
 		{
 			ex.printStackTrace() ;
 		}
+
+		return done ;
 	}
 
 
@@ -856,7 +877,7 @@ public class Game extends Application
 
 						try
 						{
-							Thread.sleep(1000*1) ;	
+							Thread.sleep(500) ;	
 						}
 						catch(Exception e)
 						{
